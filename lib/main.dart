@@ -88,7 +88,7 @@ class _MyAppState extends State<MyApp> {
                 },
               ),
               primaryColor: Styles.PRIMARY_COLOR,
-              accentColor: Styles.ACCENT_COLOR,
+              colorScheme: ThemeData().colorScheme.copyWith(secondary: Styles.ACCENT_COLOR),
               fontFamily: lang.data == 'en' ? Styles.FONT_EN : Styles.FONT_AR ,
               scaffoldBackgroundColor: Styles.WHITE_COLOR
             ),

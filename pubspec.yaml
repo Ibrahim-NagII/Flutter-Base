@@ -17,7 +17,7 @@ dependencies:
   dio: ^4.0.0
   rxdart: ^0.27.0
   flutter_bloc: ^7.0.0
-  intl: ^0.17.0
+  intl: ^0.18.0
   flutter_svg: ^0.22.0
   pin_code_text_field: ^1.8.0
   scroll_to_index: ^3.0.1
@@ -38,6 +38,7 @@ dependencies:
   hive_flutter: ^1.1.0
   permission_handler: ^10.1.0
   share_plus:
+  flutter_image_compress: ^2.0.1
 
 
 
