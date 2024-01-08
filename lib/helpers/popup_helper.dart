@@ -1,12 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 abstract class PopUpHelper {
-  static showTopSheet({@required BuildContext? context, @required Widget? child}) {
+  static showTopSheet({
+    required BuildContext? context,
+    required Widget? child,
+  }) {
     return showGeneralDialog(
       context: context!,
       barrierDismissible: true,
-      transitionDuration: Duration(milliseconds: 500),
+      transitionDuration: const Duration(milliseconds: 500),
       barrierLabel: MaterialLocalizations.of(context).dialogLabel,
       barrierColor: Colors.black.withOpacity(0.5),
       pageBuilder: (context, _, __) {
@@ -14,21 +16,31 @@ abstract class PopUpHelper {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Card(
-              child: child,
               elevation: 2,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15))),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(15),
+                  bottomRight: Radius.circular(15),
+                ),
+              ),
+              child: child,
             ),
           ],
         );
       },
-      transitionBuilder: (context, animation, secondaryAnimation, child) {
+      transitionBuilder: (
+        context,
+        animation,
+        secondaryAnimation,
+        child,
+      ) {
         return SlideTransition(
           position: CurvedAnimation(
             parent: animation,
             curve: Curves.easeOut,
           ).drive(
             Tween<Offset>(
-              begin: Offset(0, -1.0),
+              begin: const Offset(0, -1.0),
               end: Offset.zero,
             ),
           ),
@@ -38,11 +50,12 @@ abstract class PopUpHelper {
     );
   }
 
-  static showBottomSheet({@required BuildContext? context, @required Widget? child}) {
+  static showBottomSheet(
+      {required BuildContext? context, required Widget? child}) {
     return showModalBottomSheet(
       context: context!,
       elevation: 2,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(15),
           topLeft: Radius.circular(15),

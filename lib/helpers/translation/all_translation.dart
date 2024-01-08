@@ -1,10 +1,8 @@
 import 'dart:convert';
-import 'package:flutter_base/core/app_event.dart';
 import 'package:flutter_base/helpers/shared_helper.dart';
-import 'package:flutter_base/main_blocs/main_app_bloc.dart';
+import 'package:flutter_base/bloc/main_app_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-
 
 ///
 /// Preferences related
@@ -48,7 +46,7 @@ class GlobalTranslations {
   ///
   Future<void> init([String? language]) async {
     if (_locale == null) {
-      await setNewLanguage(language , false);
+      await setNewLanguage(language, false);
     }
     return;
   }
@@ -68,10 +66,13 @@ class GlobalTranslations {
   /// Routine to change the language
   ///
   Future<void> setNewLanguage(
-      [String? newLanguage, bool saveInPrefs = true , BuildContext? context]) async {
+      [String? newLanguage,
+      bool saveInPrefs = true,
+      BuildContext? context]) async {
     String? language = newLanguage;
     language ??= await getPreferredLanguage();
-    bool isLogin = await SharedHelper.sharedHelper!.readBoolean(CachingKey.IS_LOGIN);
+    bool isLogin =
+        await SharedHelper.sharedHelper!.readBoolean(CachingKey.IS_LOGIN);
     if (language == "") {
       language = "en";
     }
@@ -92,8 +93,6 @@ class GlobalTranslations {
       _onLocaleChangedCallback!();
     }
 
-
-
     return;
   }
 
@@ -111,29 +110,27 @@ class GlobalTranslations {
   /// Generic routine to fetch an application preference
   /// ----------------------------------------------------------
   Future<String> _getApplicationSavedInformation(String name) async {
-
     return SharedHelper.box!.get(_storageKey + name) ?? 'en';
   }
 
   /// ----------------------------------------------------------
   /// Generic routine to saves an application preference
   /// ----------------------------------------------------------
-   _setApplicationSavedInformation(
-      String name, String value) async {
-
+  _setApplicationSavedInformation(String name, String value) async {
     return SharedHelper.box!.put(_storageKey + name, value);
   }
 
   ///
   /// Singleton Factory
   ///
-  static final GlobalTranslations? _translations = new GlobalTranslations._internal();
+  static final GlobalTranslations _translations =
+      GlobalTranslations._internal();
 
   factory GlobalTranslations() {
-    return _translations!;
+    return _translations;
   }
 
   GlobalTranslations._internal();
 }
 
-GlobalTranslations allTranslations = new GlobalTranslations();
+GlobalTranslations allTranslations = GlobalTranslations();

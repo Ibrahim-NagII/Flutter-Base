@@ -1,4 +1,5 @@
 import 'package:flutter_base/network/mapper.dart';
+import 'package:flutter_base/utility/utility.dart';
 
 class UserModel extends SingleMapper {
   String? accessToken;
@@ -30,12 +31,12 @@ class UserModel extends SingleMapper {
 
   @override
   Mapper fromJson(Map<String, dynamic> json) {
-    print(json["user_data"]);
+    cprint(json["user_data"]);
     accessToken = json['access_token'];
     expiresIn = json['expires_in'];
     message = json['message'];
     gSettings = json['g_settings'] != null
-        ? new GSettings.fromJson(json['g_settings'])
+        ? GSettings.fromJson(json['g_settings'])
         : null;
     agentId = json['agent_id'];
     userId = json['user_id'];
@@ -45,8 +46,9 @@ class UserModel extends SingleMapper {
     scope = json['scope'];
     userData =
         json["user_data"] != null ? UserData.fromJson(json["user_data"]) : null;
-    permissions =
-        json["permissions"] != null ? Permissions.fromJson(json["permissions"]) : null;
+    permissions = json["permissions"] != null
+        ? Permissions.fromJson(json["permissions"])
+        : null;
     return UserModel(
         accessToken: accessToken,
         expiresIn: expiresIn,
@@ -63,20 +65,20 @@ class UserModel extends SingleMapper {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['access_token'] = this.accessToken;
-    data['expires_in'] = this.expiresIn;
-    if (this.gSettings != null) {
-      data['g_settings'] = this.gSettings!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['access_token'] = accessToken;
+    data['expires_in'] = expiresIn;
+    if (gSettings != null) {
+      data['g_settings'] = gSettings!.toJson();
     }
-    data['agent_id'] = this.agentId;
-    data['first_name'] = this.firstName;
-    data['middle_name'] = this.middleName;
-    data['last_name'] = this.lastName;
-    data['scope'] = this.scope;
-    data['user_id'] = this.userId;
-    data["user_data"] = this.userData;
-    data["permissions"] = this.permissions;
+    data['agent_id'] = agentId;
+    data['first_name'] = firstName;
+    data['middle_name'] = middleName;
+    data['last_name'] = lastName;
+    data['scope'] = scope;
+    data['user_id'] = userId;
+    data["user_data"] = userData;
+    data["permissions"] = permissions;
     return data;
   }
 }
@@ -152,28 +154,28 @@ class GSettings {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['company_name'] = this.companyName;
-    data['company_type'] = this.companyType;
-    data['email'] = this.email;
-    data['currency'] = this.currency;
-    data['phone'] = this.phone;
-    data['physical_address'] = this.physicalAddress;
-    data['postal_address'] = this.postalAddress;
-    data['website_url'] = this.websiteUrl;
-    data['postal_code'] = this.postalCode;
-    data['logo'] = this.logo;
-    data['favicon'] = this.favicon;
-    data['date_format'] = this.dateFormat;
-    data['amount_thousand_separator'] = this.amountThousandSeparator;
-    data['amount_decimal_separator'] = this.amountDecimalSeparator;
-    data['amount_decimal'] = this.amountDecimal;
-    data['theme'] = this.theme;
-    data['language'] = this.language;
-    data['deleted_at'] = this.deletedAt;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['company_name'] = companyName;
+    data['company_type'] = companyType;
+    data['email'] = email;
+    data['currency'] = currency;
+    data['phone'] = phone;
+    data['physical_address'] = physicalAddress;
+    data['postal_address'] = postalAddress;
+    data['website_url'] = websiteUrl;
+    data['postal_code'] = postalCode;
+    data['logo'] = logo;
+    data['favicon'] = favicon;
+    data['date_format'] = dateFormat;
+    data['amount_thousand_separator'] = amountThousandSeparator;
+    data['amount_decimal_separator'] = amountDecimalSeparator;
+    data['amount_decimal'] = amountDecimal;
+    data['theme'] = theme;
+    data['language'] = language;
+    data['deleted_at'] = deletedAt;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }
@@ -265,41 +267,36 @@ class UserData {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['agent_id'] = agentId;
-    _data['first_name'] = firstName;
-    _data['middle_name'] = middleName;
-    _data['last_name'] = lastName;
-    _data['phone'] = phone;
-    _data['email'] = email;
-    _data['registration_date'] = registrationDate;
-    _data['id_number'] = idNumber;
-    _data['city'] = city;
-    _data['state'] = state;
-    _data['country'] = country;
-    _data['postal_address'] = postalAddress;
-    _data['physical_address'] = physicalAddress;
-    _data['residential_address'] = residentialAddress;
-    _data['confirmed'] = confirmed;
-    _data['created_by'] = createdBy;
-    _data['updated_by'] = updatedBy;
-    _data['deleted_by'] = deletedBy;
-    _data['remember_token'] = rememberToken;
-    _data['deleted_at'] = deletedAt;
-    _data['created_at'] = createdAt;
-    _data['updated_at'] = updatedAt;
-    _data['national_establishment_no'] = nationalEstablishmentNo;
-    _data['representative'] = representative;
-    _data['representative_id'] = representativeId;
-    return _data;
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['agent_id'] = agentId;
+    data['first_name'] = firstName;
+    data['middle_name'] = middleName;
+    data['last_name'] = lastName;
+    data['phone'] = phone;
+    data['email'] = email;
+    data['registration_date'] = registrationDate;
+    data['id_number'] = idNumber;
+    data['city'] = city;
+    data['state'] = state;
+    data['country'] = country;
+    data['postal_address'] = postalAddress;
+    data['physical_address'] = physicalAddress;
+    data['residential_address'] = residentialAddress;
+    data['confirmed'] = confirmed;
+    data['created_by'] = createdBy;
+    data['updated_by'] = updatedBy;
+    data['deleted_by'] = deletedBy;
+    data['remember_token'] = rememberToken;
+    data['deleted_at'] = deletedAt;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['national_establishment_no'] = nationalEstablishmentNo;
+    data['representative'] = representative;
+    data['representative_id'] = representativeId;
+    return data;
   }
 }
-
-
-
-
-
 
 class Permissions {
   bool? editTenant;
@@ -339,39 +336,39 @@ class Permissions {
 
   Permissions(
       {this.editTenant,
-        this.cancelPayment,
-        this.approvePayment,
-        this.editLandlord,
-        this.manageSetting,
-        this.editProperty,
-        this.viewNotice,
-        this.viewInvoice,
-        this.createProperty,
-        this.createReading,
-        this.terminateLease,
-        this.createPayment,
-        this.editLease,
-        this.deleteLease,
-        this.deleteTenant,
-        this.viewPayment,
-        this.editProfile,
-        this.viewTenant,
-        this.deleteNotice,
-        this.viewReport,
-        this.createLandlord,
-        this.createTenant,
-        this.deleteProperty,
-        this.viewLease,
-        this.viewProperty,
-        this.createNotice,
-        this.waiveInvoice,
-        this.createLease,
-        this.deleteLandlord,
-        this.editReading,
-        this.viewReading,
-        this.editNotice,
-        this.deleteReading,
-        this.viewLandlord});
+      this.cancelPayment,
+      this.approvePayment,
+      this.editLandlord,
+      this.manageSetting,
+      this.editProperty,
+      this.viewNotice,
+      this.viewInvoice,
+      this.createProperty,
+      this.createReading,
+      this.terminateLease,
+      this.createPayment,
+      this.editLease,
+      this.deleteLease,
+      this.deleteTenant,
+      this.viewPayment,
+      this.editProfile,
+      this.viewTenant,
+      this.deleteNotice,
+      this.viewReport,
+      this.createLandlord,
+      this.createTenant,
+      this.deleteProperty,
+      this.viewLease,
+      this.viewProperty,
+      this.createNotice,
+      this.waiveInvoice,
+      this.createLease,
+      this.deleteLandlord,
+      this.editReading,
+      this.viewReading,
+      this.editNotice,
+      this.deleteReading,
+      this.viewLandlord});
 
   Permissions.fromJson(Map<String, dynamic> json) {
     editTenant = json['edit-tenant'] ?? false;
@@ -380,72 +377,72 @@ class Permissions {
     editLandlord = json['edit-landlord'] ?? false;
     manageSetting = json['manage-setting'] ?? false;
     editProperty = json['edit-property'] ?? false;
-    viewNotice = json['view-notice']?? false;
-    viewInvoice = json['view-invoice']?? false;
-    createProperty = json['create-property']?? false;
-    createReading = json['create-reading']?? false;
-    terminateLease = json['terminate-lease']?? false;
-    createPayment = json['create-payment']?? false;
-    editLease = json['edit-lease']?? false;
-    deleteLease = json['delete-lease']?? false;
-    deleteTenant = json['delete-tenant']?? false;
-    viewPayment = json['view-payment']?? false;
-    editProfile = json['edit-profile']?? false;
-    viewTenant = json['view-tenant']?? false;
-    deleteNotice = json['delete-notice']?? false;
-    viewReport = json['view-report']?? false;
-    createLandlord = json['create-landlord']?? false;
-    createTenant = json['create-tenant']?? false;
-    deleteProperty = json['delete-property']?? false;
-    viewLease = json['view-lease']?? false;
-    viewProperty = json['view-property']?? false;
-    createNotice = json['create-notice']?? false;
-    waiveInvoice = json['waive-invoice']?? false;
-    createLease = json['create-lease']?? false;
-    deleteLandlord = json['delete-landlord']?? false;
-    editReading = json['edit-reading']?? false;
-    viewReading = json['view-reading']?? false;
-    editNotice = json['edit-notice']?? false;
-    deleteReading = json['delete-reading']?? false;
-    viewLandlord = json['view-landlord']?? false;
+    viewNotice = json['view-notice'] ?? false;
+    viewInvoice = json['view-invoice'] ?? false;
+    createProperty = json['create-property'] ?? false;
+    createReading = json['create-reading'] ?? false;
+    terminateLease = json['terminate-lease'] ?? false;
+    createPayment = json['create-payment'] ?? false;
+    editLease = json['edit-lease'] ?? false;
+    deleteLease = json['delete-lease'] ?? false;
+    deleteTenant = json['delete-tenant'] ?? false;
+    viewPayment = json['view-payment'] ?? false;
+    editProfile = json['edit-profile'] ?? false;
+    viewTenant = json['view-tenant'] ?? false;
+    deleteNotice = json['delete-notice'] ?? false;
+    viewReport = json['view-report'] ?? false;
+    createLandlord = json['create-landlord'] ?? false;
+    createTenant = json['create-tenant'] ?? false;
+    deleteProperty = json['delete-property'] ?? false;
+    viewLease = json['view-lease'] ?? false;
+    viewProperty = json['view-property'] ?? false;
+    createNotice = json['create-notice'] ?? false;
+    waiveInvoice = json['waive-invoice'] ?? false;
+    createLease = json['create-lease'] ?? false;
+    deleteLandlord = json['delete-landlord'] ?? false;
+    editReading = json['edit-reading'] ?? false;
+    viewReading = json['view-reading'] ?? false;
+    editNotice = json['edit-notice'] ?? false;
+    deleteReading = json['delete-reading'] ?? false;
+    viewLandlord = json['view-landlord'] ?? false;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['edit-tenant'] = this.editTenant;
-    data['cancel-payment'] = this.cancelPayment;
-    data['approve-payment'] = this.approvePayment;
-    data['edit-landlord'] = this.editLandlord;
-    data['manage-setting'] = this.manageSetting;
-    data['edit-property'] = this.editProperty;
-    data['view-notice'] = this.viewNotice;
-    data['view-invoice'] = this.viewInvoice;
-    data['create-property'] = this.createProperty;
-    data['create-reading'] = this.createReading;
-    data['terminate-lease'] = this.terminateLease;
-    data['create-payment'] = this.createPayment;
-    data['edit-lease'] = this.editLease;
-    data['delete-lease'] = this.deleteLease;
-    data['delete-tenant'] = this.deleteTenant;
-    data['view-payment'] = this.viewPayment;
-    data['edit-profile'] = this.editProfile;
-    data['view-tenant'] = this.viewTenant;
-    data['delete-notice'] = this.deleteNotice;
-    data['view-report'] = this.viewReport;
-    data['create-landlord'] = this.createLandlord;
-    data['create-tenant'] = this.createTenant;
-    data['delete-property'] = this.deleteProperty;
-    data['view-lease'] = this.viewLease;
-    data['view-property'] = this.viewProperty;
-    data['create-notice'] = this.createNotice;
-    data['waive-invoice'] = this.waiveInvoice;
-    data['create-lease'] = this.createLease;
-    data['delete-landlord'] = this.deleteLandlord;
-    data['edit-reading'] = this.editReading;
-    data['view-reading'] = this.viewReading;
-    data['edit-notice'] = this.editNotice;
-    data['delete-reading'] = this.deleteReading;
-    data['view-landlord'] = this.viewLandlord;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['edit-tenant'] = editTenant;
+    data['cancel-payment'] = cancelPayment;
+    data['approve-payment'] = approvePayment;
+    data['edit-landlord'] = editLandlord;
+    data['manage-setting'] = manageSetting;
+    data['edit-property'] = editProperty;
+    data['view-notice'] = viewNotice;
+    data['view-invoice'] = viewInvoice;
+    data['create-property'] = createProperty;
+    data['create-reading'] = createReading;
+    data['terminate-lease'] = terminateLease;
+    data['create-payment'] = createPayment;
+    data['edit-lease'] = editLease;
+    data['delete-lease'] = deleteLease;
+    data['delete-tenant'] = deleteTenant;
+    data['view-payment'] = viewPayment;
+    data['edit-profile'] = editProfile;
+    data['view-tenant'] = viewTenant;
+    data['delete-notice'] = deleteNotice;
+    data['view-report'] = viewReport;
+    data['create-landlord'] = createLandlord;
+    data['create-tenant'] = createTenant;
+    data['delete-property'] = deleteProperty;
+    data['view-lease'] = viewLease;
+    data['view-property'] = viewProperty;
+    data['create-notice'] = createNotice;
+    data['waive-invoice'] = waiveInvoice;
+    data['create-lease'] = createLease;
+    data['delete-landlord'] = deleteLandlord;
+    data['edit-reading'] = editReading;
+    data['view-reading'] = viewReading;
+    data['edit-notice'] = editNotice;
+    data['delete-reading'] = deleteReading;
+    data['view-landlord'] = viewLandlord;
     return data;
   }
 }

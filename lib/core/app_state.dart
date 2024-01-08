@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_base/main_pages/models/status_model.dart';
 import 'package:flutter_base/network/mapper.dart';
 
 abstract class AppState {}
@@ -13,9 +12,13 @@ class Done extends AppState {
   bool? reload;
   bool? loading;
 
-  Done({this.model, this.cards, this.list, this.reload = true , this.loading = false});
+  Done(
+      {this.model,
+      this.cards,
+      this.list,
+      this.reload = true,
+      this.loading = false});
 }
-
 
 class FollowResponseDone extends AppState {
   Mapper? model;
@@ -78,10 +81,11 @@ class NotificationDoneState extends AppState {
 class SingleUserRequestDoneState extends AppState {
   List<Widget>? myRequests;
   List<Widget>? otherRequests;
-  List<StatusModel>? status;
 
-  SingleUserRequestDoneState(
-      {this.myRequests, this.otherRequests, this.status});
+  SingleUserRequestDoneState({
+    this.myRequests,
+    this.otherRequests,
+  });
 }
 
 class RequestsDoneState extends AppState {

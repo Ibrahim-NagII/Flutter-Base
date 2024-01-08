@@ -7,7 +7,6 @@ import 'package:flutter_base/helpers/styles.dart';
 import 'package:flutter_base/helpers/translation/all_translation.dart';
 import 'package:flutter_base/navigation/custom_navigation.dart';
 
-
 class PublicAppbar extends StatefulWidget {
   final String? title;
   final bool hasFilter;
@@ -17,16 +16,16 @@ class PublicAppbar extends StatefulWidget {
   final bool? withBack;
   final Widget? filterWidget;
 
-  PublicAppbar(
-      {Key? key,
-      required this.title,
-      this.onChange,
-      this.fontSize,
-      this.onCancel,
-      this.hasFilter = false,
-      this.withBack,
-      this.filterWidget})
-      : assert(
+  const PublicAppbar({
+    super.key,
+    required this.title,
+    this.onChange,
+    this.fontSize,
+    this.onCancel,
+    this.hasFilter = false,
+    this.withBack,
+    this.filterWidget,
+  }) : assert(
           hasFilter == false || filterWidget != null,
           'filterWidget cannot be null when hasFilter is true',
         );
@@ -73,16 +72,18 @@ class _PublicAppbarState extends State<PublicAppbar> {
                                     },
                                     autofocus: true,
                                     decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        hintText:
-                                            allTranslations.text("search"),
-                                        hintStyle: TextStyle(
-                                            fontWeight: FontWeight.w200,
-                                            fontSize: 12,
-                                            color: Styles.WHITE_COLOR),
-                                        contentPadding: EdgeInsets.symmetric(
-                                            horizontal: 15.0)),
-                                    style: TextStyle(
+                                      border: InputBorder.none,
+                                      hintText: allTranslations.text("search"),
+                                      hintStyle: const TextStyle(
+                                          fontWeight: FontWeight.w200,
+                                          fontSize: 12,
+                                          color: Styles.WHITE_COLOR),
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                        horizontal: 15.0,
+                                      ),
+                                    ),
+                                    style: const TextStyle(
                                         fontWeight: FontWeight.w600,
                                         fontSize: 14,
                                         color: Styles.WHITE_COLOR),
@@ -91,14 +92,13 @@ class _PublicAppbarState extends State<PublicAppbar> {
                                 InkWell(
                                   onTap: () {
                                     setState(() => showSearch = false);
-                                    if (widget.onChange != null)
-                                      widget.onCancel!();
+                                    widget.onCancel?.call();
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
                                       allTranslations.text("cancel"),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Styles.ACCENT_COLOR,
                                         fontWeight: FontWeight.w700,
                                         fontSize: 12,
@@ -117,8 +117,8 @@ class _PublicAppbarState extends State<PublicAppbar> {
                               visible: widget.withBack ?? false,
                               child: InkWell(
                                   onTap: () => CustomNavigator.pop(),
-                                  child: ArrowBack())),
-                          SizedBox(
+                                  child: const ArrowBack())),
+                          const SizedBox(
                             width: 8,
                           ),
                           AnimatedWidgets(
@@ -140,7 +140,7 @@ class _PublicAppbarState extends State<PublicAppbar> {
             ),
             widget.onChange != null
                 ? AnimatedPositioned(
-                    duration: Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 300),
                     left: _checkLang()
                         ? _checkValue(!showSearch)
                         : _checkValue(showSearch),
@@ -164,7 +164,7 @@ class _PublicAppbarState extends State<PublicAppbar> {
                 right: _checkLang() ? null : MediaQueryHelper.width - 140,
                 child: AnimatedOpacity(
                   opacity: showSearch ? 0 : 1,
-                  duration: Duration(milliseconds: 800),
+                  duration: const Duration(milliseconds: 800),
                   child: InkWell(
                       onTap: () {
                         showModalBottomSheet(

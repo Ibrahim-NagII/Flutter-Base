@@ -1,20 +1,16 @@
 import 'dart:developer';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_base/helpers/shared_helper.dart';
 import 'package:flutter_base/helpers/translation/all_translation.dart';
 import 'package:rxdart/rxdart.dart';
 
 class MainAppBloc {
-
   final lang = BehaviorSubject<String>();
   final _notifyRoute = BehaviorSubject<String?>();
   final messageNumber = BehaviorSubject<int?>();
   final theme = BehaviorSubject<bool?>();
   final connectivity = BehaviorSubject<bool?>();
   final search = BehaviorSubject<String>();
-  final shared = SharedHelper() ;
-
+  final shared = SharedHelper();
 
   Function(String) get updateLang => lang.sink.add;
   Function(bool) get updateTheme => theme.sink.add;
@@ -23,13 +19,13 @@ class MainAppBloc {
   Function(bool) get updateConnectivity => connectivity.sink.add;
   Function(String) get updateSearch => search.sink.add;
 
-
-
   Stream<String> get langStream => lang.stream.asBroadcastStream();
-  Stream<int?> get messageNumberStream => messageNumber.stream.asBroadcastStream();
+  Stream<int?> get messageNumberStream =>
+      messageNumber.stream.asBroadcastStream();
   Stream<bool?> get themeStream => theme.stream.asBroadcastStream();
   Stream<String?> get routeStream => _notifyRoute.stream.asBroadcastStream();
-  Stream<bool?> get connectivityStream => connectivity.stream.asBroadcastStream();
+  Stream<bool?> get connectivityStream =>
+      connectivity.stream.asBroadcastStream();
 
   dispose() {
     lang.close();
@@ -38,6 +34,7 @@ class MainAppBloc {
     _notifyRoute.close();
     connectivity.close();
   }
+
   getShared() async {
     String lang = await allTranslations.getPreferredLanguage();
     //here we check the theme value if true, it's be dark
@@ -46,7 +43,6 @@ class MainAppBloc {
     // }
     log('LANG $lang');
     updateLang(lang);
-
   }
 }
 

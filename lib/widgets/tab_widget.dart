@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_base/widgets/images.dart';
 import 'package:flutter_base/helpers/styles.dart';
 
 class TabWidget extends StatelessWidget {
   const TabWidget(this.data, this.isSelected, this.onClick,
-      {Key? key, this.iconPath})
-      : super(key: key);
+      {super.key, this.iconPath});
   final String data;
   final bool isSelected;
   final Function() onClick;
@@ -16,32 +15,22 @@ class TabWidget extends StatelessWidget {
       onTap: onClick,
       child: Container(
         height: 50,
-        padding: EdgeInsets.symmetric(horizontal: 12),
-        // decoration: BoxDecoration(
-        //   border: Border(
-        //     bottom: BorderSide(
-        //       width: isSelected ? 2 : 1,
-        //       color: isSelected
-        //           ? const Color(0xff5C7AEA)
-        //           : const Color(0xffEEEEEE),
-        //     ),
-        //   ),
-        // ),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(),
+            const SizedBox(),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 if (iconPath != null)
-                  SvgPicture.asset(
-                    iconPath!,
+                  Images(
+                    image: iconPath!,
                     color: isSelected
                         ? const Color(0xff5C7AEA)
                         : const Color(0xffA7A7A7),
                   ),
-                if (iconPath != null) SizedBox(width: 4),
+                if (iconPath != null) const SizedBox(width: 4),
                 Text(
                   data,
                   style: TextStyle(
@@ -54,17 +43,17 @@ class TabWidget extends StatelessWidget {
                 ),
               ],
             ),
-              Container(
-                width: 28 + (data.length * 8),
-                height: 5,
-                margin: EdgeInsets.only(top: 10),
-                decoration: BoxDecoration(
-                  color: isSelected? Styles.PRIMARY_COLOR:Colors.transparent,
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(15),
-                  ),
+            Container(
+              width: 28 + (data.length * 8),
+              height: 5,
+              margin: const EdgeInsets.only(top: 10),
+              decoration: BoxDecoration(
+                color: isSelected ? Styles.PRIMARY_COLOR : Colors.transparent,
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(15),
                 ),
-              )
+              ),
+            )
           ],
         ),
       ),

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/components/custom_btn.dart';
-import 'package:flutter_base/components/custom_images.dart';
 import 'package:flutter_base/helpers/media_query_helper.dart';
 import 'package:flutter_base/helpers/styles.dart';
 import 'package:flutter_base/navigation/custom_navigation.dart';
 
 abstract class CustomBottomSheet {
-  static show(
-      {Function? onConfirm,
-      @required String? label,
-      @required Widget? list,
-      double? height , BuildContext? context}) {
+  static show({
+    Function? onConfirm,
+    required String label,
+    required Widget list,
+    double? height,
+    BuildContext? context,
+  }) {
     showModalBottomSheet(
       context: context ?? CustomNavigator.navigatorState.currentContext!,
       backgroundColor: Colors.transparent,
@@ -23,11 +24,12 @@ abstract class CustomBottomSheet {
               height: height ?? 240,
               width: MediaQueryHelper.width,
               decoration: const BoxDecoration(
-                  color: Styles.WHITE_COLOR,
-                  borderRadius: const BorderRadius.only(
-                    topRight: const Radius.circular(30),
-                    topLeft: const Radius.circular(30),
-                  )),
+                color: Styles.WHITE_COLOR,
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(30),
+                  topLeft: Radius.circular(30),
+                ),
+              ),
               child: Column(
                 children: [
                   Expanded(
@@ -39,12 +41,14 @@ abstract class CustomBottomSheet {
                           const SizedBox(height: 24),
                           const SizedBox(height: 16),
                           Text(
-                            label!,
+                            label,
                             style: const TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.w600),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                           const SizedBox(height: 16),
-                          Expanded(child: list!),
+                          Expanded(child: list),
                         ],
                       ),
                     ),
@@ -56,7 +60,7 @@ abstract class CustomBottomSheet {
                       paddingWidth: 0.0,
                       horizontalPadding: 0.0,
                       onTap: () {
-                        onConfirm!();
+                        onConfirm?.call();
                       },
                       btnHeight: 79,
                       withPadding: false,
@@ -71,5 +75,4 @@ abstract class CustomBottomSheet {
       },
     );
   }
-
 }

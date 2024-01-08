@@ -1,7 +1,9 @@
+// ignore_for_file: constant_identifier_names
+
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:flutter_base/main_blocs/main_app_bloc.dart';
-import '../app_config/app_config.dart';
+import 'package:flutter_base/bloc/main_app_bloc.dart';
+import '../config/app_config.dart';
 import '../helpers/shared_helper.dart';
 import '../utility/utility.dart';
 import 'mapper.dart';
@@ -11,13 +13,13 @@ enum ServerMethods { GET, POST, UPDATE, DELETE, PUT, PATCH }
 
 class Network {
   static Network? _instance;
-  static Dio _dio = Dio();
+  static final Dio _dio = Dio();
   bool isActiveUser = true;
   Network._private();
 
   factory Network() {
     if (_instance == null) {
-      _dio.options.connectTimeout = 1000 * 40;
+      _dio.options.connectTimeout = const Duration(seconds: 40);
       _dio.interceptors.add(NetworkLogger.logger);
       _instance = Network._private();
     }
@@ -32,10 +34,10 @@ class Network {
     Map<String, dynamic>? header,
     ServerMethods method = ServerMethods.GET,
   }) async {
-    String _token = await SharedHelper().readString(CachingKey.TOKEN);
+    String token = await SharedHelper().readString(CachingKey.TOKEN);
 
     _dio.options.headers = {
-      'Authorization': 'Bearer $_token',
+      'Authorization': 'Bearer $token',
       'Accept': 'application/json',
       "User-Agent": "Dart",
       'Lang': mainAppBloc.lang.value,
@@ -64,17 +66,21 @@ class Network {
         errorIn: AppConfig.BASE_URL + endpoint,
         label: "SocketException",
       );
-      cprint("└------------------------------------------------------------------------------");
-      cprint("================================================================================");
+      cprint(
+          "└------------------------------------------------------------------------------");
+      cprint(
+          "================================================================================");
       rethrow;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       cprint(
         "| Error: ${e.error}: ${e.response?.toString()}",
-        errorIn: "${AppConfig.BASE_URL + endpoint}",
+        errorIn: AppConfig.BASE_URL + endpoint,
         label: "DioError",
       );
-      cprint("└------------------------------------------------------------------------------");
-      cprint("================================================================================");
+      cprint(
+          "└------------------------------------------------------------------------------");
+      cprint(
+          "================================================================================");
       if (model == null) {
         return e.response;
       } else {
@@ -86,8 +92,10 @@ class Network {
         errorIn: AppConfig.BASE_URL + endpoint,
         label: "Unhandled Exception",
       );
-      cprint("└------------------------------------------------------------------------------");
-      cprint("================================================================================");
+      cprint(
+          "└------------------------------------------------------------------------------");
+      cprint(
+          "================================================================================");
       rethrow;
     }
   }
