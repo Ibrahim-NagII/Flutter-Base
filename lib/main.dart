@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_base/config/colors/light_colors.dart';
+import 'package:flutter_base/config/themes/themes.dart';
 import 'package:flutter_base/utility/keybord_lisenter.dart';
 import 'package:flutter_base/utility/un_focus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +10,7 @@ import 'package:flutter_base/helpers/shared_helper.dart';
 import 'package:flutter_base/helpers/translation/all_translation.dart';
 import 'package:flutter_base/helpers/translation/translations.dart';
 import 'package:flutter_base/bloc/main_app_bloc.dart';
-import 'features/login/bloc/login_bloc.dart';
+import 'features/auth/login/bloc/login_bloc.dart';
 import 'features/splah/splash_bloc.dart';
 import 'helpers/styles.dart';
 import 'bloc/user_bloc.dart';
@@ -34,11 +36,6 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     mainAppBloc.getShared();
     super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
   }
 
   @override
@@ -76,7 +73,7 @@ class _MyAppState extends State<MyApp> {
                   navigatorObservers: [CustomNavigator.routeObserver],
                   debugShowCheckedModeBanner: false,
                   scaffoldMessengerKey: CustomNavigator.scaffoldState,
-                  locale: const Locale("ar", ''),
+                  locale: Locale(lang.data!, ''),
                   supportedLocales: allTranslations.supportedLocales(),
                   localizationsDelegates: const [
                     TranslationsDelegate(),
@@ -85,54 +82,29 @@ class _MyAppState extends State<MyApp> {
                     GlobalCupertinoLocalizations.delegate,
                   ],
                   title: "flutter_base",
-                  theme: ThemeData(
-                    inputDecorationTheme: InputDecorationTheme(
-                      isDense: true,
-                      hintStyle: TextStyle(
-                        fontSize: 14,
-                        color: Styles.PRIMARY_COLOR.withOpacity(0.5),
+                  themeMode: ThemeMode.light,
+                  theme: Themes.lightTheme().themeData.copyWith(
+                        appBarTheme:
+                            Themes.lightTheme().themeData.appBarTheme.copyWith(
+                                  iconTheme: const IconThemeData(
+                                    color: LightColor.black,
+                                  ),
+                                  titleTextStyle: TextStyle(
+                                    color: LightColor.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: lang.data == 'en'
+                                        ? Styles.FONT_EN
+                                        : Styles.FONT_AR,
+                                  ),
+                                ),
+                        textTheme:
+                            Themes.lightTheme().themeData.textTheme.apply(
+                                  fontFamily: lang.data == 'en'
+                                      ? Styles.FONT_EN
+                                      : Styles.FONT_AR,
+                                ),
                       ),
-                      labelStyle: TextStyle(
-                        fontSize: 14,
-                        color: Styles.PRIMARY_COLOR.withOpacity(0.5),
-                      ),
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 16,
-                      ),
-                      floatingLabelStyle: TextStyle(
-                        fontSize: 14,
-                        color: Styles.PRIMARY_COLOR.withOpacity(0.5),
-                      ),
-                      alignLabelWithHint: true,
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Styles.PRIMARY_COLOR,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Styles.PRIMARY_COLOR.withOpacity(0.1),
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    pageTransitionsTheme: const PageTransitionsTheme(
-                      builders: {
-                        TargetPlatform.android:
-                            CupertinoPageTransitionsBuilder(),
-                        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-                      },
-                    ),
-                    primaryColor: Styles.PRIMARY_COLOR,
-                    colorScheme: ThemeData().colorScheme.copyWith(
-                          secondary: Styles.WHITE_COLOR,
-                        ),
-                    fontFamily:
-                        lang.data == 'en' ? Styles.FONT_EN : Styles.FONT_AR,
-                    scaffoldBackgroundColor: Styles.WHITE_COLOR,
-                  ),
                 )
               : Container();
         },

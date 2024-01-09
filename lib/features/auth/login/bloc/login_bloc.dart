@@ -4,13 +4,13 @@ import 'package:flutter_base/core/app_core.dart';
 import 'package:flutter_base/core/app_event.dart';
 import 'package:flutter_base/core/app_notification.dart';
 import 'package:flutter_base/core/app_state.dart';
-import 'package:flutter_base/features/login/model/user_model.dart';
-import 'package:flutter_base/features/login/repo/login_repo.dart';
+import 'package:flutter_base/features/auth/login/model/user_model.dart';
+import 'package:flutter_base/features/auth/login/repo/login_repo.dart';
 import 'package:flutter_base/helpers/shared_helper.dart';
 import 'package:flutter_base/navigation/custom_navigation.dart';
 import 'package:flutter_base/navigation/routes.dart';
 import 'package:rxdart/rxdart.dart';
-import '../../../helpers/styles.dart';
+import '../../../../helpers/styles.dart';
 
 class LoginBloc extends Bloc<AppEvent, AppState> {
   final username = BehaviorSubject<String>();

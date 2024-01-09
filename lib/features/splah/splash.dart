@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/components/animated_widget.dart';
 import 'package:flutter_base/core/app_event.dart';
 import 'package:flutter_base/features/splah/splash_bloc.dart';
-import 'package:flutter_base/helpers/styles.dart';
+import 'package:flutter_base/utility/extintions.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -34,14 +34,14 @@ class _SplashState extends State<Splash> {
             height: 100,
             width: 100,
             decoration: BoxDecoration(
-              color: Styles.PRIMARY_COLOR.withOpacity(0.05),
+              color: context.theme.primaryColorLight,
               borderRadius: BorderRadius.circular(100),
             ),
-            child: const Center(
+            child: Center(
               child: Text(
                 "LOGO",
                 style: TextStyle(
-                  color: Styles.PRIMARY_COLOR,
+                  color: context.theme.primaryColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                 ),

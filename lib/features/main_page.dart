@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/features/intro/view/onboarding.dart';
-import 'package:flutter_base/helpers/styles.dart';
 import 'package:flutter_base/widgets/nav_app.dart';
 
 class MainPage extends StatefulWidget {
@@ -39,7 +38,6 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Styles.WHITE_COLOR,
       body: fregmant(_index),
       bottomNavigationBar: NavApp(
         index: _index,

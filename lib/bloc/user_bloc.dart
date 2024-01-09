@@ -1,4 +1,4 @@
-import 'package:flutter_base/features/login/model/user_model.dart';
+import 'package:flutter_base/features/auth/login/model/user_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_base/core/app_event.dart';
 import 'package:flutter_base/core/app_state.dart';

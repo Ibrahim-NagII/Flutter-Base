@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/helpers/styles.dart';
 import 'package:flutter_base/navigation/custom_navigation.dart';
 import 'package:flutter_base/navigation/routes.dart';
 import 'package:flutter_base/utility/extintions.dart';
@@ -14,6 +13,28 @@ class IntroView extends StatefulWidget {
 class _IntroViewState extends State<IntroView> {
   int selectPage = 0;
   PageController controller = PageController();
+  List<IntroItem> introItems = [
+    IntroItem(
+      title: "أراضي ومخططات",
+      subTitle: "استثمر في المستقبل وامتلك الأرض التي تحلم بها",
+      images: [
+        "",
+        "",
+        "",
+        "",
+      ],
+    ),
+    IntroItem(
+      title: "مشاريع سكنية",
+      subTitle: "اجعل حلمك بالتملك العقاري حقيقة داخل تطبيقنا",
+      images: [
+        "",
+        "",
+        "",
+        "",
+      ],
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +48,7 @@ class _IntroViewState extends State<IntroView> {
               width: context.w,
               child: PageView.builder(
                 controller: controller,
-                itemCount: 3,
+                itemCount: introItems.length,
                 onPageChanged: (value) {
                   selectPage = value;
                   setState(() {});
@@ -38,28 +59,28 @@ class _IntroViewState extends State<IntroView> {
                     spacing: 10,
                     runSpacing: 10,
                     children: List.generate(
-                      4,
-                      (index) => Container(
+                      introItems[index].images.length,
+                      (index2) => Container(
                         transform: Matrix4.translationValues(
-                          index == 0
+                          index2 == 0
                               ? 50.w
-                              : index == 3
+                              : index2 == 3
                                   ? -50.w
                                   : 0,
-                          index == 2
+                          index2 == 2
                               ? -10
-                              : index == 1
+                              : index2 == 1
                                   ? 10
                                   : 0,
                           0,
                         ),
-                        width: index == 0 || index == 3
+                        width: index2 == 0 || index2 == 3
                             ? context.w / 1.8
                             : context.w / 2.8,
                         height:
-                            index == 0 || index == 3 ? 120 : context.w / 1.7,
+                            index2 == 0 || index2 == 3 ? 120 : context.w / 1.7,
                         decoration: BoxDecoration(
-                          color: Styles.ACCENT_COLOR,
+                          color: context.theme.primaryColor,
                           borderRadius: BorderRadius.circular(50),
                         ),
                       ),
@@ -72,7 +93,7 @@ class _IntroViewState extends State<IntroView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
-                3,
+                introItems.length,
                 (index) => Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Container(
@@ -80,8 +101,8 @@ class _IntroViewState extends State<IntroView> {
                     width: 10,
                     decoration: BoxDecoration(
                       color: selectPage == index
-                          ? Styles.PRIMARY_COLOR
-                          : Styles.PRIMARY_COLOR.withOpacity(0.1),
+                          ? context.theme.primaryColor
+                          : context.theme.primaryColorDark,
                       borderRadius: BorderRadius.circular(100),
                     ),
                   ),
@@ -103,17 +124,17 @@ class _IntroViewState extends State<IntroView> {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: Styles.PRIMARY_COLOR.withOpacity(0.5),
+                color: context.theme.primaryColorDark,
               ),
             ),
             SizedBox(height: 16.h),
             GestureDetector(
               onTap: () {
-                if (selectPage == 2) {
+                if (selectPage == introItems.length - 1) {
                   CustomNavigator.push(Routes.MAIN_PAGE, arguments: 3);
                 } else {
                   controller.nextPage(
-                    duration: const Duration(seconds: 1),
+                    duration: const Duration(milliseconds: 300),
                     curve: Curves.easeIn,
                   );
                 }
@@ -126,9 +147,16 @@ class _IntroViewState extends State<IntroView> {
                       child: SizedBox(
                         height: 60,
                         width: 60,
-                        child: CircularProgressIndicator(
-                          value: (selectPage + 1) / 3 * 1,
-                          color: Styles.PRIMARY_COLOR,
+                        child: TweenAnimationBuilder<double>(
+                          tween: Tween<double>(
+                              begin: 0.0,
+                              end: (selectPage + 1) / introItems.length * 1),
+                          duration: const Duration(milliseconds: 300),
+                          builder: (context, value, _) =>
+                              CircularProgressIndicator(
+                            value: value,
+                            strokeCap: StrokeCap.round,
+                          ),
                         ),
                       ),
                     ),
@@ -142,13 +170,13 @@ class _IntroViewState extends State<IntroView> {
                           height: 40,
                           width: 40,
                           decoration: BoxDecoration(
-                            color: Styles.PRIMARY_COLOR,
+                            color: context.theme.primaryColor,
                             borderRadius: BorderRadius.circular(100),
                           ),
-                          child: const Center(
+                          child: Center(
                             child: Icon(
                               Icons.arrow_forward,
-                              color: Styles.WHITE_COLOR,
+                              color: context.theme.scaffoldBackgroundColor,
                             ),
                           ),
                         ),
@@ -163,4 +191,16 @@ class _IntroViewState extends State<IntroView> {
       ),
     );
   }
+}
+
+class IntroItem {
+  final String title;
+  final String subTitle;
+  final List<String> images;
+
+  IntroItem({
+    required this.title,
+    required this.subTitle,
+    required this.images,
+  });
 }

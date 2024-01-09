@@ -143,10 +143,7 @@ class _UploadImageState extends State<UploadImage> {
                         children: [
                           CustomBtn(
                             text: allTranslations.text("Change"),
-                            btnHeight: 31,
-                            btnWidth: 84,
-                            txtFontSize: 12,
-                            onTap: () {
+                            onPressed: () {
                               ImagePickerHelper.showOption(onGet: (file) async {
                                 setState(() => image = file);
                                 var multipartImage =
@@ -159,17 +156,17 @@ class _UploadImageState extends State<UploadImage> {
                           ),
                           const SizedBox(width: 8.0),
                           CustomBtn(
-                            btnWidth: 84,
+                            width: 84,
                             text: allTranslations.text("Remove"),
-                            btnHeight: 31,
-                            txtFontSize: 12,
-                            onTap: () {
+                            height: 31,
+                            fontSize: 12,
+                            onPressed: () {
                               setState(() => image = null);
                               widget.updatedImage?.call(null);
                               widget.updateFile?.call(null);
                             },
                             color: Styles.IN_ACTIVE.withOpacity(.1),
-                            txtColor: Styles.IN_ACTIVE,
+                            textColor: Styles.IN_ACTIVE,
                           ),
                         ],
                       )

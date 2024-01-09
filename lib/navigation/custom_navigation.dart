@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/features/auth/otp/view/otp_view.dart';
+import 'package:flutter_base/features/auth/signup/view/signup_view.dart';
 import 'package:flutter_base/features/intro/view/intro_view.dart';
-import 'package:flutter_base/features/login/view/login.dart';
+import 'package:flutter_base/features/auth/login/view/login.dart';
 import 'package:flutter_base/features/splah/splash.dart';
 import 'package:flutter_base/features/main_page.dart';
 import '../features/intro/view/onboarding.dart';
@@ -32,6 +34,10 @@ abstract class CustomNavigator {
         return pageRouteBuilder(const IntroView());
       case Routes.LOGIN:
         return pageRouteBuilder(const Login());
+      case Routes.OTP:
+        return pageRouteBuilder(const OtpView());
+      case Routes.SIGNUP:
+        return pageRouteBuilder(const SignUpView());
       case Routes.MAIN_PAGE:
         return pageRouteBuilder(
           MainPage(

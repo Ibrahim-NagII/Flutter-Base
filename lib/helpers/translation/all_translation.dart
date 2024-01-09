@@ -110,14 +110,14 @@ class GlobalTranslations {
   /// Generic routine to fetch an application preference
   /// ----------------------------------------------------------
   Future<String> _getApplicationSavedInformation(String name) async {
-    return SharedHelper.box!.get(_storageKey + name) ?? 'en';
+    return SharedHelper.box!.get(_storageKey + name) ?? 'ar';
   }
 
   /// ----------------------------------------------------------
   /// Generic routine to saves an application preference
   /// ----------------------------------------------------------
   _setApplicationSavedInformation(String name, String value) async {
-    return SharedHelper.box!.put(_storageKey + name, value);
+    return SharedHelper.box?.put(_storageKey + name, value);
   }
 
   ///

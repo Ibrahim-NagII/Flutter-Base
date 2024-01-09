@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter_base/utility/utility.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:flutter_base/features/login/model/user_model.dart';
+import 'package:flutter_base/features/auth/login/model/user_model.dart';
 import 'package:flutter_base/helpers/translation/all_translation.dart';
 import 'package:flutter_base/navigation/custom_navigation.dart';
 import 'package:flutter_base/navigation/routes.dart';

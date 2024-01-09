@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/helpers/styles.dart';
+import 'package:flutter_base/utility/extintions.dart';
 import 'package:flutter_base/widgets/images.dart';
 
 class NavApp extends StatefulWidget {
@@ -16,27 +16,27 @@ class NavApp extends StatefulWidget {
 }
 
 class _NavAppState extends State<NavApp> {
-  Color _selectedColor(int index) =>
-      widget.index == index ? Styles.PRIMARY_COLOR : Colors.grey;
+  Color _selectedColor(int index) => widget.index == index
+      ? context.theme.primaryColor
+      : context.theme.primaryColorDark;
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       iconSize: 35,
       onTap: widget.onSelect,
-      elevation: 10,
       type: BottomNavigationBarType.fixed,
       currentIndex: widget.index,
-      backgroundColor: Styles.WHITE_COLOR,
-      selectedLabelStyle: const TextStyle(
-        color: Styles.PRIMARY_COLOR,
+      selectedLabelStyle: TextStyle(
+        color: context.theme.primaryColor,
         fontSize: 11,
       ),
-      unselectedLabelStyle: const TextStyle(
-        color: Styles.SUB_HEADER,
+      unselectedLabelStyle: TextStyle(
+        color: context.theme.primaryColorDark,
         fontSize: 11,
       ),
-      selectedItemColor: Styles.PRIMARY_COLOR,
+      unselectedItemColor: context.theme.primaryColorDark,
+      selectedItemColor: context.theme.primaryColor,
       items: [
         BottomNavigationBarItem(
           icon: Images(

@@ -57,14 +57,7 @@ abstract class CustomBottomSheet {
                     visible: onConfirm != null,
                     child: CustomBtn(
                       text: 'Submit',
-                      paddingWidth: 0.0,
-                      horizontalPadding: 0.0,
-                      onTap: () {
-                        onConfirm?.call();
-                      },
-                      btnHeight: 79,
-                      withPadding: false,
-                      radius: 0,
+                      onPressed: () {},
                     ),
                   )
                 ],

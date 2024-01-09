@@ -1,5 +1,5 @@
 import 'package:flutter_base/config/api_names.dart';
-import 'package:flutter_base/features/login/model/user_model.dart';
+import 'package:flutter_base/features/auth/login/model/user_model.dart';
 import 'package:flutter_base/network/network_layer.dart';
 
 abstract class LoginRepo {

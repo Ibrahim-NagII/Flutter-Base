@@ -18,7 +18,6 @@ class _OnBoardingState extends State<OnBoarding> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Styles.WHITE_COLOR,
         title: const Text("الحساب"),
       ),
       body: Padding(
@@ -28,25 +27,27 @@ class _OnBoardingState extends State<OnBoarding> {
           horizontalOffset: 0.0,
           data: [
             SizedBox(height: 96.h),
-            AnimatedWidgets(
-              durationMilli: 2000.0,
-              verticalOffset: 0.0,
-              horizontalOffset: 0.0,
-              child: Center(
-                child: Container(
-                  height: 100,
-                  width: 100,
-                  decoration: BoxDecoration(
-                    color: Styles.PRIMARY_COLOR.withOpacity(0.05),
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "LOGO",
-                      style: TextStyle(
-                        color: Styles.PRIMARY_COLOR,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
+            Center(
+              child: Hero(
+                tag: "logo",
+                child: Material(
+                  child: Center(
+                    child: Container(
+                      height: 100,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        color: Styles.PRIMARY_COLOR.withOpacity(0.05),
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          "LOGO",
+                          style: TextStyle(
+                            color: Styles.PRIMARY_COLOR,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -79,7 +80,7 @@ class _OnBoardingState extends State<OnBoarding> {
               tag: "btn",
               child: CustomBtn(
                 text: "تسجيل الدخول",
-                onTap: () {
+                onPressed: () {
                   CustomNavigator.push(Routes.LOGIN);
                 },
               ),
@@ -87,9 +88,12 @@ class _OnBoardingState extends State<OnBoarding> {
             SizedBox(height: 24.h),
             CustomBtn(
               text: "إنشاء حساب",
-              onTap: () {},
-              onlyBorder: true,
-              txtColor: Styles.PRIMARY_COLOR,
+              color: context.color.secondary,
+              borderColor: context.theme.primaryColor,
+              textColor: context.theme.primaryColor,
+              onPressed: () {
+                CustomNavigator.push(Routes.SIGNUP);
+              },
             ),
           ],
         ),

@@ -6,6 +6,8 @@ class Routes {
   static const BOARDING = "BOARDING";
   static const INTRO = "INTRO";
   static const LOGIN = "LOGIN";
+  static const OTP = "OTP";
+  static const SIGNUP = "SIGNUP";
   static const MAIN_PAGE = "MAIN_PAGE";
   static const HOME_PAGE = "HOME_PAGE";
   static const PROFILE = "PROFILE";
