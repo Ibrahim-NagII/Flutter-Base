@@ -24,12 +24,12 @@ dependencies:
   flutter_staggered_animations: ^1.1.1
   font_awesome_flutter: ^10.6.0
   cached_network_image: ^3.3.1
-  url_launcher: ^6.2.2
+  url_launcher: ^6.2.3
   firebase_messaging: ^14.7.10
   flutter_local_notifications: ^16.3.0
   firebase_core: ^2.24.2
   flutter_launcher_icons: ^0.13.1
-  image_picker: ^1.0.6
+  image_picker: ^1.0.7
   animations: ^2.0.11
   smooth_page_indicator: ^1.1.0
   flutter_spinkit: ^5.2.0
@@ -39,7 +39,8 @@ dependencies:
   permission_handler: ^11.1.0
   share_plus:
   flutter_image_compress: ^2.1.0
-  path_provider: ^2.1.1
+  path_provider: ^2.1.2
+  path: ^1.8.3
 
 
 

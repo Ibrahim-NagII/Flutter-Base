@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/navigation/custom_navigation.dart';
 import 'package:flutter_base/navigation/routes.dart';
 import 'package:flutter_base/utility/extintions.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class IntroView extends StatefulWidget {
   const IntroView({super.key});
@@ -16,7 +17,7 @@ class _IntroViewState extends State<IntroView> {
   List<IntroItem> introItems = [
     IntroItem(
       title: "أراضي ومخططات",
-      subTitle: "استثمر في المستقبل وامتلك الأرض التي تحلم بها",
+      subTitle: "استثمر في المستقبل وامتلك الأرض \nالتي تحلم بها",
       images: [
         "",
         "",
@@ -26,7 +27,7 @@ class _IntroViewState extends State<IntroView> {
     ),
     IntroItem(
       title: "مشاريع سكنية",
-      subTitle: "اجعل حلمك بالتملك العقاري حقيقة داخل تطبيقنا",
+      subTitle: "اجعل حلمك بالتملك العقاري حقيقة \nداخل تطبيقنا",
       images: [
         "",
         "",
@@ -60,28 +61,38 @@ class _IntroViewState extends State<IntroView> {
                     runSpacing: 10,
                     children: List.generate(
                       introItems[index].images.length,
-                      (index2) => Container(
-                        transform: Matrix4.translationValues(
-                          index2 == 0
-                              ? 50.w
-                              : index2 == 3
-                                  ? -50.w
-                                  : 0,
-                          index2 == 2
-                              ? -10
-                              : index2 == 1
-                                  ? 10
-                                  : 0,
-                          0,
-                        ),
-                        width: index2 == 0 || index2 == 3
-                            ? context.w / 1.8
-                            : context.w / 2.8,
-                        height:
-                            index2 == 0 || index2 == 3 ? 120 : context.w / 1.7,
-                        decoration: BoxDecoration(
-                          color: context.theme.primaryColor,
-                          borderRadius: BorderRadius.circular(50),
+                      (index2) => AnimationConfiguration.staggeredGrid(
+                        columnCount: 2,
+                        position: index2,
+                        duration: const Duration(milliseconds: 300),
+                        child: ScaleAnimation(
+                          child: FadeInAnimation(
+                            child: Container(
+                              transform: Matrix4.translationValues(
+                                index2 == 0
+                                    ? 50.w
+                                    : index2 == 3
+                                        ? -50.w
+                                        : 0,
+                                index2 == 2
+                                    ? -10
+                                    : index2 == 1
+                                        ? 10
+                                        : 0,
+                                0,
+                              ),
+                              width: index2 == 0 || index2 == 3
+                                  ? context.w / 1.8
+                                  : context.w / 2.8,
+                              height: index2 == 0 || index2 == 3
+                                  ? 120
+                                  : context.w / 1.7,
+                              decoration: BoxDecoration(
+                                color: context.theme.primaryColor,
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -110,16 +121,16 @@ class _IntroViewState extends State<IntroView> {
               ),
             ),
             SizedBox(height: 16.h),
-            const Text(
-              "اراضي ومخططات",
-              style: TextStyle(
+            Text(
+              introItems[selectPage].title,
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: 4.h),
             Text(
-              "استسمر في المستقبل وامتلك الاراضي \n التي تحلم بها",
+              introItems[selectPage].subTitle,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,

@@ -2,31 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class AnimatedWidgets extends StatelessWidget {
-  final Widget? child;
-  final double? verticalOffset;
-  final double? horizontalOffset;
-  final double? durationMilli;
+  final Widget child;
+  final double verticalOffset;
+  final double horizontalOffset;
+  final int durationMilli;
+  final int postion;
 
   const AnimatedWidgets({
     super.key,
-    this.child,
-    this.verticalOffset,
-    this.horizontalOffset,
-    this.durationMilli,
+    required this.child,
+    this.verticalOffset = 50,
+    this.horizontalOffset = 0,
+    this.durationMilli = 500,
+    this.postion = 2,
   });
 
   @override
   Widget build(BuildContext context) {
     return AnimationConfiguration.staggeredList(
-      position: 2,
-      duration: Duration(
-          milliseconds: durationMilli != null ? durationMilli!.toInt() : 500),
+      position: postion,
+      duration: Duration(milliseconds: durationMilli),
       child: SlideAnimation(
         curve: Curves.easeInOut,
-        horizontalOffset: horizontalOffset ?? 0,
-        verticalOffset: verticalOffset ?? 50,
+        horizontalOffset: horizontalOffset,
+        verticalOffset: verticalOffset,
         child: FadeInAnimation(
-          child: child!,
+          child: child,
         ),
       ),
     );

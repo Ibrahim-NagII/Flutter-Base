@@ -27,7 +27,7 @@ class _SplashState extends State<Splash> {
     return Scaffold(
       body: Center(
         child: AnimatedWidgets(
-          durationMilli: 2000.0,
+          durationMilli: 2000,
           verticalOffset: 0.0,
           horizontalOffset: 0.0,
           child: Container(
